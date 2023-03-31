@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createProduct } from '../redux/products/actions';
 
 const ProductForm = () => {
+  const dispatch = useDispatch();
+  const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
+  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      createProduct({
+        name,
+        category,
+        imageUrl,
+        price,
+        quantity,
+      })
+    );
+  };
   return (
     <div className="formContainer">
       <h4 className="formTitle">Add New Product</h4>
-      <form className="space-y-4 text-[#534F4F]" id="lws-addProductForm">
+      <form
+        className="space-y-4 text-[#534F4F]"
+        id="lws-addProductForm"
+        onSubmit={submitHandler}
+      >
         {/* <!-- product name --> */}
         <div className="space-y-2">
           <label htmlFor="lws-inputName">Product Name</label>
@@ -12,6 +37,8 @@ const ProductForm = () => {
             className="addProductInput"
             id="lws-inputName"
             type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
@@ -22,6 +49,8 @@ const ProductForm = () => {
             className="addProductInput"
             id="lws-inputCategory"
             type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
             required
           />
         </div>
@@ -32,6 +61,8 @@ const ProductForm = () => {
             className="addProductInput"
             id="lws-inputImage"
             type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
             required
           />
         </div>
@@ -44,6 +75,8 @@ const ProductForm = () => {
               className="addProductInput"
               type="number"
               id="lws-inputPrice"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               required
             />
           </div>
@@ -54,6 +87,8 @@ const ProductForm = () => {
               className="addProductInput"
               type="number"
               id="lws-inputQuantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
               required
             />
           </div>
