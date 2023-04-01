@@ -8,7 +8,7 @@ const ProductForm = () => {
   const [category, setCategory] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [inStock, setInStock] = useState('');
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const ProductForm = () => {
         category,
         imageUrl,
         price,
-        quantity,
+        inStock,
       })
     );
   };
@@ -87,8 +87,8 @@ const ProductForm = () => {
               className="addProductInput"
               type="number"
               id="lws-inputQuantity"
-              value={quantity}
-              onChange={(e) => setQuantity(e.target.value)}
+              value={inStock}
+              onChange={(e) => setInStock(e.target.value)}
               required
             />
           </div>

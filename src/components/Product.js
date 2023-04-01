@@ -1,6 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/cart/actions';
 
-const Product = ({ name, category, imageUrl, price, quantity }) => {
+const Product = ({ id, name, category, imageUrl, price, inStock }) => {
+  const dispatch = useDispatch();
+  const addToCartHandler = () => {
+    dispatch(addToCart({ id, name, category, imageUrl, price, inStock }));
+  };
   return (
     <div className="lws-productCard">
       <img className="lws-productImage" src={imageUrl} alt="product" />
@@ -12,10 +18,12 @@ const Product = ({ name, category, imageUrl, price, quantity }) => {
             BDT <span className="lws-price">{price}</span>
           </p>
           <p className="productQuantity">
-            QTY <span className="lws-quantity">{quantity}</span>
+            QTY <span className="lws-quantity">{inStock}</span>
           </p>
         </div>
-        <button className="lws-btnAddToCart">Add To Cart</button>
+        <button className="lws-btnAddToCart" onClick={addToCartHandler}>
+          Add To Cart
+        </button>
       </div>
     </div>
   );
