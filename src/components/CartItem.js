@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeFromCart } from '../redux/cart/actions';
+import { quantityUpdateFromCart, removeFromCart } from '../redux/cart/actions';
 
 const CartItem = ({
   productId,
@@ -14,6 +14,9 @@ const CartItem = ({
   const dispatch = useDispatch();
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
+  };
+  const quantityUpdate = (id, updateType) => {
+    dispatch(quantityUpdateFromCart(id, updateType));
   };
   return (
     <div className="cartCard">
@@ -32,11 +35,17 @@ const CartItem = ({
       <div className="flex items-center justify-center col-span-4 mt-4 space-x-8 md:mt-0">
         {/* <!-- amount buttons --> */}
         <div className="flex items-center space-x-4">
-          <button className="lws-incrementQuantity">
+          <button
+            className="lws-incrementQuantity"
+            onClick={() => quantityUpdate(productId, 'increment')}
+          >
             <i className="text-lg fa-solid fa-plus"></i>
           </button>
           <span className="lws-cartQuantity">{quantity}</span>
-          <button className="lws-decrementQuantity">
+          <button
+            className="lws-decrementQuantity"
+            onClick={() => quantityUpdate(productId, 'decrement')}
+          >
             <i className="text-lg fa-solid fa-minus"></i>
           </button>
         </div>
