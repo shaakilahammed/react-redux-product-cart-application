@@ -1,15 +1,33 @@
-import { CREATE_PRODUCT, STOCK_UPDATE_PRODUCT } from './actionTypes';
+import {
+  ADD_MANY_QUANTITY,
+  ADD_PRODUCT,
+  ADD_PRODUCT_QUANTITY,
+  REMOVE_PRODUCT_QUANTITY,
+} from './actionTypes';
 
-export const createProduct = (product) => {
+export const addProduct = (product) => {
   return {
-    type: CREATE_PRODUCT,
+    type: ADD_PRODUCT,
     payload: product,
   };
 };
 
-export const stockUpdate = (id, updateType) => {
+export const addProductQuantity = (product) => {
   return {
-    type: STOCK_UPDATE_PRODUCT,
-    payload: { id, updateType },
+    type: ADD_PRODUCT_QUANTITY,
+    payload: product,
+  };
+};
+
+export const removeProductQuantity = (product) => {
+  return {
+    type: REMOVE_PRODUCT_QUANTITY,
+    payload: product,
+  };
+};
+export const addManyQuantity = (product) => {
+  return {
+    type: ADD_MANY_QUANTITY,
+    payload: product,
   };
 };

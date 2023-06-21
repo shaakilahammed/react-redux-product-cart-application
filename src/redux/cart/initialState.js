@@ -1,5 +1,2 @@
-const initialState = {
-  products: [],
-  subTotal: 0,
-};
+const initialState = [];
 export default initialState;

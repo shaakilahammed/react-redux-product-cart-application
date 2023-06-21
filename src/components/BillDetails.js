@@ -2,7 +2,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const BillDetails = () => {
-  const { subTotal } = useSelector((state) => state.cart);
+  const carts = useSelector((state) => state.cart);
+  const subTotal = carts.reduce(
+    (total, item) => item.price * item.cartQuantity + total,
+    0
+  );
+  // const { subTotal } = useSelector((state) => state.cart);
   return (
     <div>
       <div className="billDetailsCard">

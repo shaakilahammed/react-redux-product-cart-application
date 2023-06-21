@@ -1,2 +1,4 @@
-export const CREATE_PRODUCT = 'products/create';
-export const STOCK_UPDATE_PRODUCT = 'products/stock-update-product';
+export const ADD_PRODUCT = 'product/add';
+export const ADD_PRODUCT_QUANTITY = 'product/addQuantity';
+export const REMOVE_PRODUCT_QUANTITY = 'product/removeQuantity';
+export const ADD_MANY_QUANTITY = 'product/addManyQuantity';

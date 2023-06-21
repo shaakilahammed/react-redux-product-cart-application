@@ -1,26 +1,40 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createProduct } from '../redux/products/actions';
+import { addProduct } from '../redux/products/actions';
 
 const ProductForm = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [price, setPrice] = useState('');
-  const [inStock, setInStock] = useState('');
+  const [input, setInput] = useState({
+    name: '',
+    category: '',
+    imgUrl: '',
+    price: '',
+    quantity: '',
+  });
+  // const [name, setName] = useState('');
+  // const [category, setCategory] = useState('');
+  // const [imgUrl, setImgUrl] = useState('');
+  // const [price, setPrice] = useState('');
+  // const [quantity, setQuantity] = useState('');
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      createProduct({
-        name,
-        category,
-        imageUrl,
-        price,
-        inStock,
-      })
-    );
+    dispatch(addProduct(input));
+    setInput({
+      name: '',
+      category: '',
+      imgUrl: '',
+      price: '',
+      quantity: '',
+    });
+  };
+
+  const inputHandler = (e, fieldName) => {
+    if (fieldName === 'quantity' || fieldName === 'price') {
+      setInput({ ...input, [fieldName]: Number(e.target.value) });
+    } else {
+      setInput({ ...input, [fieldName]: e.target.value });
+    }
   };
   return (
     <div className="formContainer">
@@ -37,8 +51,8 @@ const ProductForm = () => {
             className="addProductInput"
             id="lws-inputName"
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={input?.name}
+            onChange={(e) => inputHandler(e, 'name')}
             required
           />
         </div>
@@ -49,8 +63,8 @@ const ProductForm = () => {
             className="addProductInput"
             id="lws-inputCategory"
             type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={input?.category}
+            onChange={(e) => inputHandler(e, 'category')}
             required
           />
         </div>
@@ -61,8 +75,8 @@ const ProductForm = () => {
             className="addProductInput"
             id="lws-inputImage"
             type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            value={input?.imgUrl}
+            onChange={(e) => inputHandler(e, 'imgUrl')}
             required
           />
         </div>
@@ -75,8 +89,8 @@ const ProductForm = () => {
               className="addProductInput"
               type="number"
               id="lws-inputPrice"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              value={input?.price}
+              onChange={(e) => inputHandler(e, 'price')}
               required
             />
           </div>
@@ -87,8 +101,8 @@ const ProductForm = () => {
               className="addProductInput"
               type="number"
               id="lws-inputQuantity"
-              value={inStock}
-              onChange={(e) => setInStock(e.target.value)}
+              value={input?.quantity}
+              onChange={(e) => inputHandler(e, 'quantity')}
               required
             />
           </div>

@@ -1,21 +1,17 @@
 import { Provider } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import CartPage from './pages/CartPage';
 
 import HomePage from './pages/HomePage';
 import store from './redux/store';
+import { useState } from 'react';
 
 const App = () => {
+  const [isCartPage, setIsCartPage] = useState(false);
   return (
     <Provider store={store}>
-      <NavBar />
-      <main className="py-16">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/cart" element={<CartPage />} />
-        </Routes>
-      </main>
+      <NavBar setIsCartPage={setIsCartPage} />
+      <main className="py-16">{!isCartPage ? <HomePage /> : <CartPage />}</main>
     </Provider>
   );
 };
